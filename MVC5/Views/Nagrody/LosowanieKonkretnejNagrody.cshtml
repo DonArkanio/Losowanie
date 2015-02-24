@@ -1,0 +1,34 @@
+﻿@using MVC5.Helpers
+@model MVC5.ViewModels.OstatecznyViewModel
+@{
+    ViewBag.Title = "LosowanieKonkretnejNagrody";
+}
+
+<h2>LosowanieKonkretnejNagrody</h2>
+@using (Html.BeginForm("LosowanieKonkretnejNagrody", "Nagrody", FormMethod.Post)
+{
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Uzytkownik.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uzytkownik.Email)
+        </th>
+        <th>
+            @Html.Label("Gravatar")
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Uzytkownik.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Uzytkownik.Email)
+        </td>
+        <td>
+            @ImageExtensions.RenderGravatarImage(null, Model.Uzytkownik.Email, 80)
+        </td>
+    </tr>
+</table>
+}

@@ -1,0 +1,47 @@
+﻿@model MVC5.Models.NagrodyModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń nagrodę</h2>
+
+<h3>Czy jesyteś pewny że chcesz usunąć tą nagrodę?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Wróć do listy nagród", "Index")
+        </div>
+    }
+</div>

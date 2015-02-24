@@ -1,0 +1,5 @@
+﻿1. Wywalic ID kolumny produktow / done
+2. Dorobic walidacje zakresu / done + dorobiono walidacje formatu obrazka 
+3. Dorobić edycje miniatury produktu / done
+
+4. Dorobić możliwość uploadowania plików CSV a później z nich losowania /done

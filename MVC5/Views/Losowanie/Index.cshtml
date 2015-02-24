@@ -1,0 +1,106 @@
+﻿@using System.Security
+@model MVC5.Models.ZakresModel
+@{
+    ViewBag.Title = "Index";
+}
+<br /><br />
+<h2>Podaj zakres losowania</h2>
+<br />
+@using (Html.BeginForm("Losuj", "Losowanie", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.Label("Początek: ")
+    @Html.TextBox("zakrPoczatek")
+    <br />
+    @Html.Label("Koniec: ")
+    @Html.TextBox("zakrKoniec")
+
+    <br /><br />
+    <input id="btnSubmit" type="submit" value="Losuj teraz" onclick="monitor();" />
+
+}
+<br />
+<div class="row">
+    <span id="error" name="error"></span>
+</div>
+<div class="row">
+    <span id="emptyerror" name="emptyerror"></span>
+</div>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        // funkcja monitoruje aktualne znaki wpisywane w texboxy w zakresie
+        function monitor()
+        {
+            var tbx1 = $('#zakrPoczatek').val();
+            var tbx2 = $('#zakrKoniec').val();
+
+            // jesli jest conajmniej 1 znak to sprawdza typ znaku
+            if (tbx1.length > 0 || tbx2.length > 0)
+            {             
+                // regex pozwalajacy na wpisywanie tylko wartosci numerycznych
+                var reg = /^([0-9]+)$/;
+                // jesli sa inne niz numeryczne to ukrywa przycisk Losuj
+                // nastepnie zabezpiecza przed Postbackiem ( wysłaniem wartości do akcji kontrolera poprzez POST )
+                // oprocz tego zabezpiecza przed wysłaniem przy uzyciu klawisza ENTER
+                if (!reg.test(tbx1) || !reg.test(tbx2)) {
+                    // dodatkowo wypisuje odpowiedni komunikat w widoku dla uzytkownika
+                    $('#error').html("Wykryto nie dozwolone znaki! Należy wpisać tylko liczby!").css({ 'color': 'red', 'font-size': '150%' });
+                    $('#btnSubmit').hide();
+                    if ($('#btnSubmit').click(function (event) {
+                        // tutaj zabezpiecza przed postbackiem
+                        event.preventDefault();
+                    }) || event.keyCode === 13) {
+                        // a tutaj przed postbackiem wysylanym przez ENTER
+                        event.preventDefault();
+                    };
+                } else {
+                    // jesli nie ma bledu walidacji to
+                    // nie wyswietla zadnego komunikatu o bledzie
+                    // pokazuje przycisk Losuj z przedzialu
+                    // zezwala również na wysłanie poprzez ENTER
+                    $('#error').html("");
+                    $('#btnSubmit').show();
+                    if ($('#btnSubmit').click(function (event) {
+                        event.setDefaults();
+                    }) || event.keyCode === 13) {
+                        event.setDefaults();
+                    }
+                }
+            }
+            else
+            {
+                $('#error').html("");
+                $('#btnSubmit').show();
+                if ($('#btnSubmit').click(function(event) {
+                    event.setDefaults();
+                }) || event.keyCode === 13) {
+                    event.setDefaults();
+                };
+            }
+        }
+
+        // sprawdza czy nie zostało cos czasem wpisane do textboxow
+        // co pewien czas i robi blura
+        var timer = '';
+
+        $('#zakrPoczatek').on('focus', function() {
+            timer = setInterval(monitor, 100);
+        }).on('blur', function() {
+            clearInterval(timer);
+        });
+
+        $('#zakrKoniec').on('focus', function() {
+            timer = setInterval(monitor, 100);
+        }).on('blur', function() {
+            clearInterval(timer);
+        });
+    </script>
+}
+
+

@@ -1,0 +1,64 @@
+﻿@using MVC5.Helpers
+@model MVC5.ViewModels.OstatecznyViewModel
+@{
+    ViewBag.Title = "LosujJednaNagordeDlaJednegoUzytkownika";
+}
+
+<br/>
+<h3>Wylosowana nagroda to: </h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nagroda.Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nagroda.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nagroda.Obrazek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nagroda.Cena)
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Nagroda.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Nagroda.Opis)
+        </td>
+        <td>
+            <img src="@Model.Nagroda.Obrazek" class="img-rounded" style="max-height: 100px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Nagroda.Cena)
+        </td>
+    </tr>
+</table>
+
+<h3>Nagrodę otrzyma użytkownik: </h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Uzytkownik.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uzytkownik.Email)
+        </th>
+        <th>
+            @Html.Label("Gravatar")
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Uzytkownik.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Uzytkownik.Email)
+        </td>
+        <td>
+            @ImageExtensions.RenderGravatarImage(null, Model.Uzytkownik.Email, 80)
+        </td>
+    </tr>
+</table>

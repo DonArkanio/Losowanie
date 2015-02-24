@@ -1,0 +1,45 @@
+﻿@using MVC5.Helpers
+@model IEnumerable<MVC5.Models.UserModel>
+@{
+    ViewBag.Title = "WyswietlWczytanychUzytkownikow";
+}
+
+<h2>Wczytani użytkownicy z pliku CSV</h2>
+<br />
+@using (Html.BeginForm("LosujNagrodeDlaWczytanychUzytkownikow", "Losowanie", FormMethod.Post))
+{
+    <input id="btnSubmit" type="submit" value="Losuj nagrodę dla 1 użytkownika" />
+}
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.Label("Ewentualny gravatar")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @ImageExtensions.RenderGravatarImage(null, item.Email, 80)
+            </td>
+        </tr>
+    }
+
+
+</table>
+

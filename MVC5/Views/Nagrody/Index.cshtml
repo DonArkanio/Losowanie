@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MVC5.Models.NagrodyModel>
+
+@{
+    ViewBag.Title = "Baza Nagród";
+}
+
+<h2>Zarządzanie nagrodami</h2>
+
+<p>
+    @Html.ActionLink("Dodaj nagrodę", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Obrazek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@item.Obrazek" class="img-rounded" style="max-height: 100px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ID }) |
+            @Html.ActionLink("Losuj nagrodę", "LosujWybranaNagrode", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

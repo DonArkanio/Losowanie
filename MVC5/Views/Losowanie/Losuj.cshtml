@@ -1,0 +1,41 @@
+﻿@model MVC5.Models.NagrodyModel
+
+@{
+    ViewBag.Title = "Baza Nagród";
+}
+
+<h2>Wylosowana nagroda</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Obrazek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="@Model.Obrazek" class="img-rounded" style="max-height: 100px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Opis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Cena)
+        </td>
+    </tr>
+
+</table>
